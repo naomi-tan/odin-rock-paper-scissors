@@ -72,7 +72,7 @@ function game(){
     let round = 0;
     let score = 0;
     let outcome;
-    while(round < 5){
+    while(round < numRounds){
         console.log("ROUND ", round + 1)
         do{ // if outcome is a draw, replay round
             playerSelection = getPlayerChoice();
@@ -110,4 +110,10 @@ function checkUserInput(userInput){
     }
 }
 
-game();
+let numRounds = 1;
+
+let rockButton = document.querySelector("#rock");
+let paperButton = document.querySelector("#paper");
+let scissorsButton = document.querySelector("#scissors");
+
+// game();
