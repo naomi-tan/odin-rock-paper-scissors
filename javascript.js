@@ -9,12 +9,27 @@ function getComputerChoice(){
 
 function getPlayerChoice(){
     // Get user input and convert string to all lower case
-    let playerSelection;
-    do{ // prompt again if user cancels prompt
-        playerSelection = prompt("Enter rock, paper, or scissors: ");
-    }while(checkUserInput(playerSelection) === "invalid")
+    let playerSelection = prompt("Enter rock, paper, or scissors:").toLowerCase();
     console.log("Player Choice: ", playerSelection)
-    return playerSelection.toLowerCase();
+    return playerSelection;
+}
+
+function checkUserInput(userInput){
+    if (userInput === null){
+        console.log("Stop being a wimp and fight me!")
+        return "invalid";
+    }
+    if (userInput === ""){
+        console.log("Nervous? You entered nothing!")
+        return "invalid";
+    }
+    if ((userInput.toLowerCase() === "rock") || (userInput.toLowerCase() === "paper") || (userInput.toLowerCase() === "scissors")){
+        return "valid";
+    }
+    else{
+        console.log("Do I need to spell it for you?.. Invalid entry.")
+        return "invalid";
+    }
 }
 
 function playRound(playerSelection, computerSelection){
@@ -65,9 +80,8 @@ function playRound(playerSelection, computerSelection){
     return outcome;
 }
 
-function game(){
+function game(playerSelection){
     // Play best of 5 and keep score
-    let playerSelection;
     let computerSelection;
     let round = 0;
     let score = 0;
@@ -75,7 +89,6 @@ function game(){
     while(round < numRounds){
         console.log("ROUND ", round + 1)
         do{ // if outcome is a draw, replay round
-            playerSelection = getPlayerChoice();
             computerSelection = getComputerChoice();
             outcome = playRound(playerSelection, computerSelection);
         } while(outcome === "draw");
@@ -84,29 +97,11 @@ function game(){
         }
         ++round; // increment round counter
     }
-    if (score >= 3){
+    if (score >= (numRounds / 2)){
         console.log("You win - I'll beat you next time!")
     }
     else{
         console.log("I win - Better luck next time!")
-    }
-}
-
-function checkUserInput(userInput){
-    if (userInput === null){
-        console.log("Stop being a wimp and fight me!")
-        return "invalid";
-    }
-    if (userInput === ""){
-        console.log("Nervous? You entered nothing!")
-        return "invalid";
-    }
-    if ((userInput.toLowerCase() === "rock") || (userInput.toLowerCase() === "paper") || (userInput.toLowerCase() === "scissors")){
-        return "valid";
-    }
-    else{
-        console.log("Do I need to spell it for you?.. Invalid entry.")
-        return "invalid";
     }
 }
 
@@ -116,4 +111,16 @@ let rockButton = document.querySelector("#rock");
 let paperButton = document.querySelector("#paper");
 let scissorsButton = document.querySelector("#scissors");
 
-// game();
+// if button pressed, play game with selection
+rockButton.addEventListener("click", (function(event) {
+    console.log("Player Choice: rock");
+    game("rock");
+}));
+paperButton.addEventListener("click", (function(event) {
+    console.log("Player Choice: paper");
+    game("paper");
+}));
+scissorsButton.addEventListener("click", (function(event) {
+    console.log("Player Choice: scissors");
+    game("scissors");
+}));
