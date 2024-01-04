@@ -7,30 +7,6 @@ function getComputerChoice(){
     return computerChoice;
 }
 
-function getPlayerChoice(){
-    // Get user input and convert string to all lower case
-    let playerSelection = prompt("Enter rock, paper, or scissors:").toLowerCase();
-    console.log("Player Choice: ", playerSelection)
-    return playerSelection;
-}
-
-function checkUserInput(userInput){
-    if (userInput === null){
-        console.log("Stop being a wimp and fight me!")
-        return "invalid";
-    }
-    if (userInput === ""){
-        console.log("Nervous? You entered nothing!")
-        return "invalid";
-    }
-    if ((userInput.toLowerCase() === "rock") || (userInput.toLowerCase() === "paper") || (userInput.toLowerCase() === "scissors")){
-        return "valid";
-    }
-    else{
-        console.log("Do I need to spell it for you?.. Invalid entry.")
-        return "invalid";
-    }
-}
 
 function playRound(playerSelection, computerSelection){
     // Return outcome of the round
@@ -81,31 +57,39 @@ function playRound(playerSelection, computerSelection){
 }
 
 function game(playerSelection){
-    // Play best of 5 and keep score
-    let computerSelection;
-    let round = 0;
-    let score = 0;
-    let outcome;
-    while(round < numRounds){
-        console.log("ROUND ", round + 1)
-        do{ // if outcome is a draw, replay round
-            computerSelection = getComputerChoice();
-            outcome = playRound(playerSelection, computerSelection);
-        } while(outcome === "draw");
-        if (outcome === "win"){
-            ++score;
-        }
-        ++round; // increment round counter
+    console.log("Player Choice: " + playerSelection);
+    computerSelection = getComputerChoice();
+    outcome = playRound(playerSelection, computerSelection);
+    if (outcome === "win") {
+        ++playerScore;
     }
-    if (score >= (numRounds / 2)){
-        console.log("You win - I'll beat you next time!")
+    else if (outcome === "lose") {
+        ++computerScore;
     }
-    else{
-        console.log("I win - Better luck next time!")
+    console.log("Computer Score: " + computerScore + ", Player Score: " + playerScore)
+    if (playerScore >= numWins){
+        console.log("You win - I'll beat you next time!");
+        init()
+    }
+    if (computerScore >= numWins) {
+        console.log("I win - Better luck next time!");
+        init()
     }
 }
 
-let numRounds = 1;
+
+function init() {
+    console.log("-----NEW GAME-----")
+    computerScore = 0;
+    playerScore = 0;
+}
+
+
+let computerScore;
+let playerScore;
+let numWins = 5;
+
+init();
 
 let rockButton = document.querySelector("#rock");
 let paperButton = document.querySelector("#paper");
@@ -113,14 +97,11 @@ let scissorsButton = document.querySelector("#scissors");
 
 // if button pressed, play game with selection
 rockButton.addEventListener("click", (function(event) {
-    console.log("Player Choice: rock");
     game("rock");
 }));
 paperButton.addEventListener("click", (function(event) {
-    console.log("Player Choice: paper");
     game("paper");
 }));
 scissorsButton.addEventListener("click", (function(event) {
-    console.log("Player Choice: scissors");
     game("scissors");
 }));
