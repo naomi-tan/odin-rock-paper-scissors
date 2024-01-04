@@ -71,10 +71,12 @@ function game(playerSelection){
     computerScoreDisplay.textContent = computerScore;
     if (playerScore >= numWins){
         console.log("You win - I'll beat you next time!");
+        outcomeDisplay.textContent = "You win - I'll beat you next time!";
         init()
     }
     if (computerScore >= numWins) {
         console.log("I win - Better luck next time!");
+        outcomeDisplay.textContent = "I win - Better luck next time!";
         init()
     }
 }
@@ -86,6 +88,7 @@ function init() {
     playerScore = 0;
     playerScoreDisplay.textContent = playerScore;
     computerScoreDisplay.textContent = computerScore;
+    //outcomeDisplay.textContent = "";
 }
 
 
@@ -99,6 +102,8 @@ let playerScoreDisplay = document.querySelector(".playerScore")
 let rockButton = document.querySelector("#rock");
 let paperButton = document.querySelector("#paper");
 let scissorsButton = document.querySelector("#scissors");
+
+let outcomeDisplay = document.querySelector(".outcome");
 
 init();
 
