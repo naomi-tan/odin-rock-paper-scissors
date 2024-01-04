@@ -1,3 +1,33 @@
+body {
+    background-color: rgb(65, 84, 255);
+}
+
+.heading h1 {
+    --shadow-width: 1px;
+    --shadow-width-: -1px;
+    --shadow-color: black;
+    text-align: center;
+    color: yellow;
+    font-size: 50px;
+    text-shadow: 
+    var(--shadow-width) var(--shadow-width) 0 var(--shadow-color),
+    var(--shadow-width-) var(--shadow-width) 0 var(--shadow-color),
+    var(--shadow-width-) var(--shadow-width-) 0 var(--shadow-color),
+    var(--shadow-width) var(--shadow-width-) 0 var(--shadow-color);
+}
+
+.graphics {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .button-list li {
     display: inline-block;
+}
+
+.score {
+    color: yellow;
+    font-size: 20px;
+    text-align: center;
 }
