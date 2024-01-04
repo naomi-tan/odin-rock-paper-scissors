@@ -67,6 +67,8 @@ function game(playerSelection){
         ++computerScore;
     }
     console.log("Computer Score: " + computerScore + ", Player Score: " + playerScore)
+    playerScoreDisplay.textContent = playerScore;
+    computerScoreDisplay.textContent = computerScore;
     if (playerScore >= numWins){
         console.log("You win - I'll beat you next time!");
         init()
@@ -82,6 +84,8 @@ function init() {
     console.log("-----NEW GAME-----")
     computerScore = 0;
     playerScore = 0;
+    playerScoreDisplay.textContent = playerScore;
+    computerScoreDisplay.textContent = computerScore;
 }
 
 
@@ -89,11 +93,14 @@ let computerScore;
 let playerScore;
 let numWins = 5;
 
-init();
+let computerScoreDisplay = document.querySelector(".computerScore")
+let playerScoreDisplay = document.querySelector(".playerScore")
 
 let rockButton = document.querySelector("#rock");
 let paperButton = document.querySelector("#paper");
 let scissorsButton = document.querySelector("#scissors");
+
+init();
 
 // if button pressed, play game with selection
 rockButton.addEventListener("click", (function(event) {
