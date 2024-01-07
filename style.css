@@ -24,11 +24,17 @@ body {
 
 .button-list li {
     display: inline-block;
+    margin: 5px;
 }
 
 .scene {
     position: relative;
     text-align: center;
+    display: flex;
+}
+
+.scene img {
+    max-height: 200px;
 }
 
 .outcome {
