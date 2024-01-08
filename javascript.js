@@ -52,17 +52,9 @@ function game(playerSelection){
     console.log("Player Choice: " + playerSelection);
     let computerSelection = getComputerChoice();
     dispPlayers(playerSelection, computerSelection);
-    setTimeout(playRound(playerSelection, computerSelection), 1000);    
-}
-
-
-function getComputerChoice(){
-    // Return random option rock, paper or scissors when called
-    const choices = ["rock", "paper", "scissors"]; // store possible choices as array of strings
-    let randInt = Math.round((Math.random() * 2)); // random integer 0-2
-    let computerChoice = choices[randInt]; // map integer to array index
-    console.log("Computer Choice: ", computerChoice)
-    return computerChoice;
+    setTimeout(() => {
+        playRound(playerSelection, computerSelection);
+    }, 1000);    
 }
 
 
@@ -102,7 +94,9 @@ function playRound(playerSelection, computerSelection){
                 break;
             }
     }
-    setTimeout(showOutcome(playerSelection, computerSelection, outcome), 1000);
+    setTimeout(() => {
+        showOutcome(playerSelection, computerSelection, outcome);
+    }, 1000);
 }
 
 
@@ -137,15 +131,32 @@ function showOutcome(playerSelection, computerSelection, outcome) {
 
     if (playerScore >= numWins){
         console.log("You win - I'll beat you next time!");
+        clearScene();
         dispOutcome("You win - I'll beat you next time!");
         init()
     }
     if (computerScore >= numWins) {
         console.log("I win - Better luck next time!");
+        clearScene();
         dispOutcome("I win - Better luck next time!");
         init()
     }
-    setTimeout(dispPlayerSelect(), 1000);
+    let nextRoundButton = document.createElement('button');
+    nextRoundButton.textContent = 'Next Round';
+    sceneDisplay.appendChild(nextRoundButton);
+    nextRoundButton.addEventListener('click', (function(event) {
+        dispPlayerSelect();
+    }))
+}
+
+
+function getComputerChoice(){
+    // Return random option rock, paper or scissors when called
+    const choices = ["rock", "paper", "scissors"]; // store possible choices as array of strings
+    let randInt = Math.round((Math.random() * 2)); // random integer 0-2
+    let computerChoice = choices[randInt]; // map integer to array index
+    console.log("Computer Choice: ", computerChoice)
+    return computerChoice;
 }
 
 
@@ -207,8 +218,3 @@ let sceneDisplay = document.querySelector(".scene");
 
 init();
 dispPlayerSelect();
-
-// init, show player selection, player selects one, play game, display selected players, wait, 
-// fight, wait, 
-// show players, outcome, wait, 
-// player select, if win show outcome
