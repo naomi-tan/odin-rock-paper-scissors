@@ -9,26 +9,38 @@ function init() {
 
 function dispPlayerSelect() {
     clearScene();
+    let playerSelectPrompt = document.createElement('p');
+    playerSelectPrompt.textContent = 'Select your fighter:';
+    sceneDisplay.append(playerSelectPrompt);
     let playerButtons = document.createElement('ul');
     playerButtons.className = 'button-list';
 
     let rockli = document.createElement('li');
     let rockButton = document.createElement('button');
-    rockButton.textContent = 'rock';
+    let rockImg = document.createElement('img');
+    rockImg.setAttribute('src', 'imgs/rock.png');
+    rockButton.appendChild(rockImg);
+    // rockButton.textContent = 'rock';
     rockButton.id = 'rock';
     rockli.appendChild(rockButton);
     playerButtons.appendChild(rockli);
 
     let paperli = document.createElement('li');
     let paperButton = document.createElement('button');
-    paperButton.textContent = 'paper';
+    let paperImg = document.createElement('img');
+    paperImg.setAttribute('src', 'imgs/paper.png');
+    paperButton.appendChild(paperImg);
+    // paperButton.textContent = 'paper';
     paperButton.id = 'paper';
     paperli.appendChild(paperButton);
     playerButtons.appendChild(paperli);
 
     let scissorsli = document.createElement('li');
     let scissorsButton = document.createElement('button');
-    scissorsButton.textContent = 'scissors';
+    let scissorsImg = document.createElement('img');
+    scissorsImg.setAttribute('src', 'imgs/scissors.png');
+    scissorsButton.appendChild(scissorsImg);
+    // scissorsButton.textContent = 'scissors';
     scissorsButton.id = 'scissors';
     scissorsli.appendChild(scissorsButton);
     playerButtons.appendChild(scissorsli);
@@ -132,19 +144,24 @@ function showOutcome(playerSelection, computerSelection, outcome) {
     if (playerScore >= numWins){
         console.log("You win - I'll beat you next time!");
         clearScene();
-        dispOutcome("You win - I'll beat you next time!");
+        let gameEndMssg = document.createElement('p');
+        gameEndMssg.textContent = "You win - I'll beat you next time!";
+        sceneDisplay.append(gameEndMssg);
         init()
     }
     if (computerScore >= numWins) {
         console.log("I win - Better luck next time!");
         clearScene();
-        dispOutcome("I win - Better luck next time!");
+        let gameEndMssg = document.createElement('p');
+        gameEndMssg.textContent = "I win - Better luck next time!";
+        sceneDisplay.append(gameEndMssg);
         init()
     }
     let nextRoundButton = document.createElement('button');
     nextRoundButton.textContent = 'Next Round';
     sceneDisplay.appendChild(nextRoundButton);
     nextRoundButton.addEventListener('click', (function(event) {
+        console.log("Next Round...");
         dispPlayerSelect();
     }))
 }
@@ -162,8 +179,13 @@ function getComputerChoice(){
 
 function dispPlayers(playerSelection, computerSelection) {
     selections = [playerSelection, computerSelection];
+    let playersList = document.createElement('ul');
+    playersList.className = 'button-list';
+    let playerli = document.createElement('li');
+    let computerli = document.createElement('li');
     let playerImg = document.createElement('img');
     let computerImg = document.createElement('img');
+    lis = [playerli, computerli];
     imgs = [playerImg, computerImg];
     for (let i = 0; i < 2; i++) {
         selection = selections[i];
@@ -178,8 +200,10 @@ function dispPlayers(playerSelection, computerSelection) {
             selectionPath = 'imgs/scissors.png';
         }
         img.setAttribute('src', selectionPath);
-        sceneDisplay.appendChild(img);
+        lis[i].appendChild(img);
+        playersList.appendChild(lis[i]);
     }
+    sceneDisplay.appendChild(playersList);
 }
 
 

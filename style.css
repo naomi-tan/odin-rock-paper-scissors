@@ -3,6 +3,7 @@ body {
 }
 
 .heading h1 {
+    margin-bottom: 100px;
     --shadow-width: 1px;
     --shadow-width-: -1px;
     --shadow-color: black;
@@ -27,17 +28,49 @@ body {
     margin: 5px;
 }
 
+.button-list li button {
+    background-color: transparent;
+    border-style: none;
+}
+
+.button-list li button img {
+    max-height: 150px;
+}
+
 .scene {
     position: relative;
     text-align: center;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+}
+
+.scene p {
+    color: yellow;
+    font-size: 30px;
 }
 
 .scene img {
     max-height: 200px;
 }
 
+.scene > button {
+    max-width: 200px;
+    background-color: yellow;
+    border-style: solid;
+    border-color: red;
+    font-size: 20px;
+    align-items: end;
+}
+
 .outcome {
+    min-width: 400px;
+    min-height: 200px;
+    --shadow-width: 1px;
+    --shadow-width-: -1px;
+    --shadow-color: yellow;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -45,6 +78,11 @@ body {
     color: red;
     padding: 10px;
     font-size: 30px;
+    text-shadow: 
+    var(--shadow-width) var(--shadow-width) 0 var(--shadow-color),
+    var(--shadow-width-) var(--shadow-width) 0 var(--shadow-color),
+    var(--shadow-width-) var(--shadow-width-) 0 var(--shadow-color),
+    var(--shadow-width) var(--shadow-width-) 0 var(--shadow-color);
 }
 
 .score {
