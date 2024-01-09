@@ -147,7 +147,6 @@ function showOutcome(playerSelection, computerSelection, outcome) {
         let gameEndMssg = document.createElement('p');
         gameEndMssg.textContent = "You win - I'll beat you next time!";
         sceneDisplay.append(gameEndMssg);
-        init()
     }
     if (computerScore >= numWins) {
         console.log("I win - Better luck next time!");
@@ -155,13 +154,14 @@ function showOutcome(playerSelection, computerSelection, outcome) {
         let gameEndMssg = document.createElement('p');
         gameEndMssg.textContent = "I win - Better luck next time!";
         sceneDisplay.append(gameEndMssg);
-        init()
     }
     let nextRoundButton = document.createElement('button');
     nextRoundButton.textContent = 'Next Round';
     sceneDisplay.appendChild(nextRoundButton);
     nextRoundButton.addEventListener('click', (function(event) {
-        console.log("Next Round...");
+        if ((playerScore >= numWins) || (computerScore >= numWins)) {
+            init();
+        }
         dispPlayerSelect();
     }))
 }
